@@ -1,7 +1,10 @@
+import Header from "@/components/Header/Header";
+import {UserType} from "@/constants/types";
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      Deluxe Delivery
+    <main className="flex bg-white min-h-screen flex-col items-center justify-between">
+      <Header type={UserType.CUSTOMER} />
     </main>
   )
 }
