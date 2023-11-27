@@ -11,16 +11,14 @@ function Header(props: HeaderProps) {
 
     const heightClass = page === "OTHER" ? "lg:h-36 h-28 justify-center" : "h-[800px] justify-start";
 
-
     return (
         <>
-            <div className={`h-full ${heightClass}  flex flex-col w-screen bg-gradient-to-b from-primary-1 to-primary-2 " +
+            <div className={`${heightClass}  flex flex-col bg-gradient-to-b from-primary-1 to-primary-2 " +
                 " px-[8%] lg:px-20 xl:px-40 py-3`}>
                 <NavBar page={page} />
                 {page === "MAIN_MENU" && <Hero />}
             </div>
-            {/* You can add the background color directly to the Logo or the first div */}
-            <div className="w-screen h-3 bg-violet-200" />
+            <div className="h-3 bg-violet-200" />
         </>
     );
 }
