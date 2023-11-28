@@ -1,13 +1,11 @@
 import React from 'react';
-import {UserType} from "@/constants/types";
 
 export interface HeaderProps {
-    type: UserType;
     page: 'MAIN_MENU' | 'OTHER';
 }
 function Header(props: HeaderProps) {
     // destructure props
-    const {type, page} = props;
+    const {page} = props;
 
     const heightClass = page === "OTHER" ? "lg:h-36 h-28 justify-center" : "h-[800px] justify-start";
 
@@ -44,10 +42,8 @@ function NavBar(props:{page: 'MAIN_MENU' | 'OTHER'}) {
             </div>
             <div className="flex gap-4 flex-row items-center pt-1">
                 <div className="flex flex-row gap-14 text-white text-lg font-medium font-['Axiforma'] mr-12">
-                    <div>Solutions</div>
-                    <div>Products</div>
                     <div>About</div>
-                    <div>Contact</div>
+                    <div>Support</div>
                 </div>
                 <>
                 <button className="w-36 h-16 px-9 py-3.5 bg-white rounded-2xl justify-start items-center gap-2.5 inline-flex">
