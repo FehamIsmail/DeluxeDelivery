@@ -34,7 +34,7 @@ function Subtitle(props: { text: string; color?: string }) {
 
     return (
         <div className="h-fit w-fit flex flex-col items-center gap-2">
-            <div className={`text-center text-slate-600 text-4xl font-extrabold font-['Axiforma'] leading-10 ${color ? `text-${color}` : ''}`}>
+            <div className={`text-center text-slate-600 text-4xl font-extrabold  leading-10 ${color ? `text-${color}` : ''}`}>
                 {text}
             </div>
             <div className={`w-20 h-1 ${barColorClass} rounded-tl-sm rounded-br-sm`} />
@@ -47,8 +47,8 @@ function SolutionCard(props: {title: string, description: string}) {
     return (
         <div className="w-72 h-80 bg-white border border-slate-200 border-opacity-70 flex flex-col items-center py-[50px] gap-[20px]">
             <img className="w-[83px] h-[59px]" src={props.title.toLowerCase()+".png"} alt={props.title} />
-            <div className="text-center text-slate-600 text-2xl font-semibold font-['Axiforma'] leading-10">{props.title}</div>
-            <div className="w-60 opacity-80 text-center text-slate-600 text-base font-normal font-['Axiforma'] leading-loose">{props.description}</div>
+            <div className="text-center text-slate-600 text-2xl font-semibold  leading-10">{props.title}</div>
+            <div className="w-60 opacity-80 text-center text-slate-600 text-base font-normal  leading-loose">{props.description}</div>
         </div>
     );
 }
@@ -96,11 +96,11 @@ function Accordion() {
             <div className="mb-10 flex justify-center">
             <Subtitle text={'Frequently Asked Questions'}/>
             </div>
-            <div className="min-h-[200px] w-[1250px] flex flex-col items-center border border-slate-200 border-opacity-70">
+            <div className="min-h-[200px] w-[1250px] bg-white flex flex-col items-center border rounded-2xl border-slate-200 border-opacity-70">
                 <div className="w-full flex flex-col items-center divide-[#F1F6FF] divide-y-[2px] rounded-2xl">
-                    {items[0].map((item) => (
-                        <AccordionItem item={item} toggleItemOpen={toggleItemOpen}/>
-                    ))}
+                    {items[0].map((item, index) => {
+                        return <AccordionItem key={index} item={item} toggleItemOpen={toggleItemOpen} />
+                    })}
                 </div>
             </div>
         </div>
@@ -110,14 +110,14 @@ function Accordion() {
 function AccordionItem(props: {item: AccordionItem, toggleItemOpen: (title: string) => void}) {
     const {item, toggleItemOpen} = props;
     return (
-        <div className="w-full h-fit bg-white flex flex-col items-center py-[50px] gap-[20px] p-[43px]">
+        <div className="w-full h-fit flex flex-col items-center py-[50px] gap-[20px] p-[43px]">
             <div className="flex flex-row items-center justify-between w-full">
-                <div className="text-center text-slate-600 text-2xl font-semibold font-['Axiforma'] leading-10">{item.title}</div>
+                <div className="text-center text-slate-600 text-2xl font-semibold  leading-10">{item.title}</div>
                 <button onClick={() => toggleItemOpen(item.title)}>
                     <img className="w-[24px] h-[24px]" src={item.isOpen ? 'minus.png' : 'plus.png'} alt={item.title} />
                 </button>
             </div>
-            <div className={`w-full opacity-80 text-slate-600 text-base font-normal font-['Axiforma'] leading-loose ${item.isOpen ? '' : 'hidden'}`}>{item.description}</div>
+            <div className={`w-full opacity-80 text-slate-600 text-base font-normal  leading-loose ${item.isOpen ? '' : 'hidden'}`}>{item.description}</div>
         </div>
     );
 }
@@ -125,18 +125,18 @@ function AccordionItem(props: {item: AccordionItem, toggleItemOpen: (title: stri
 function FleetBanner() {
     return (
         <div className="h-[580px] bg-primary-1 w-full p-40 bg-cover bg-center"  style={{ backgroundImage: "url('/fleet_tracking_banner.png')"}} >
-            <div className="text-white text-5xl leading-[4rem] font-extrabold font-['Axiforma'] ">
+            <div className="text-white text-5xl leading-[4rem] font-extrabold  ">
                 Advanced Fleet Tracking <br/>Solution Tracking
             </div>
 
             <div className="mt-10 flex flex-row gap-8 items-center">
                 <button className="w-52 h-16 px-10 py-4 bg-amber-500 rounded-2xl justify-start items-center gap-2.5 inline-flex">
-                    <div className="text-white text-xl font-semibold font-['Axiforma']">Get Started</div>
+                    <div className="text-white text-xl font-semibold ">Get Started</div>
                 </button>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-12 h-12">
                     <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm14.024-.983a1.125 1.125 0 010 1.966l-5.603 3.113A1.125 1.125 0 019 15.113V8.887c0-.857.921-1.4 1.671-.983l5.603 3.113z" clipRule="evenodd" />
                 </svg>
-                <div className="ml-[-20px] w-72 h-fit pt-1 text-white text-xl font-normal font-['Axiforma']">Watch how it works</div>
+                <div className="ml-[-20px] w-72 h-fit pt-1 text-white text-xl font-normal ">Watch how it works</div>
 
             </div>
         </div>
@@ -151,13 +151,13 @@ function LandingFooter() {
                     <div className="w-[58px] h-[58px] bg-gradient-to-br from-fuchsia-500 to-indigo-500 rounded-full flex items-center justify-center pr-[3px]">
                         <img src="/logo_arrow.svg" alt="Deluxe Delivery Logo" className="" />
                     </div>
-                    <div className="pt-4 text-slate-600 text-xl font-extrabold font-['Axiforma']">Delivery Deluxe</div>
+                    <div className="pt-4 text-slate-600 text-xl font-extrabold ">Delivery Deluxe</div>
                 </div>
                 <LandingFooterItem title={'Product'} item1={'Features'} item2={'API'} item3={'Solutions'}/>
                 <LandingFooterItem title={'Company'} item1={'About Us'} item2={'Contact Us'} item3={'Career'}/>
                 <LandingFooterItem title={'Support'} item1={'Support Center'} item2={'Live Chat'} item3={'System Status'}/>
                 <div className="flex flex-col gap-4">
-                    <div className="text-slate-600 text-xl font-semibold font-['Axiforma'] capitalize leading-[56px]">Follow Us</div>
+                    <div className="text-slate-600 text-xl font-semibold  capitalize leading-[56px]">Follow Us</div>
                     <img className="h-10 mt-[-20px] object-cover" src={'socials.png'} alt={'Socials'}></img>
                 </div>
 
@@ -170,8 +170,8 @@ function LandingFooter() {
 function LandingFooterItem(props: {title:string, item1: string, item2: string, item3: string }){
     return (
         <div className="flex flex-col gap-4">
-            <div className="text-slate-600 text-xl font-semibold font-['Axiforma'] capitalize leading-[56px]">{props.title}</div>
-            <div className="opacity-80 text-slate-600 text-base font-normal font-['Axiforma'] leading-[42.08px]">
+            <div className="text-slate-600 text-xl font-semibold  capitalize leading-[56px]">{props.title}</div>
+            <div className="opacity-80 text-slate-600 text-base font-normal  leading-[42.08px]">
                 {props.item1}
                 <br/>{props.item2}
                 <br/>{props.item3}</div>

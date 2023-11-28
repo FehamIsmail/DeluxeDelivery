@@ -58,7 +58,7 @@ function SideBar() {
     return (
         <div className="flex flex-col h-[920px] w-[250px] bg-white rounded-[20px] border border-gray-100 shadow-xl mb-16">
             <div className="w-full h-[68px] flex items-center  bg-primary-1 rounded-t-[20px]">
-                <div className="w-full h-full flex justify-center items-center text-white text-2xl font-medium font-['Axiforma']">Orders</div>
+                <div className="w-full h-full flex justify-center items-center text-white text-2xl font-medium  ">Orders</div>
             </div>
             <div className="flex flex-col gap-2 h-fit w-full mt-10 px-[24px]">
                 {sideBarItems.map((item, index) => {
@@ -69,7 +69,7 @@ function SideBar() {
             </div>
             <div className="border-b-2 border-gray-200 my-8"></div>
             <div className="flex flex-col gap-2 h-fit w-full px-[24px]">
-                <div className="text-black text-opacity-50 text-base font-semibold font-['Inter'] leading-tight">
+                <div className="text-black text-opacity-50 text-base font-semibold   leading-tight">
                     Live Tracking
                 </div>
                 {sideBarItems.map((item, index) => {
@@ -81,8 +81,8 @@ function SideBar() {
             <div className="border-b-2 w-full mt-auto border-gray-200 self-end"></div>
             <div className={"flex flex-col h-[150px] w-full self-end p-8"}>
                 <UserCircleIcon className={"h-11 text-gray-700 ml-[-3px] mr-auto"}/>
-                <div className="mt-2 text-black text-sm font-semibold font-['Inter'] leading-none">Pie Crust</div>
-                <div className="text-black text-opacity-50 text-xs font-normal font-['Inter']">hello@piecrust.uk</div>
+                <div className="mt-2 text-black text-sm font-semibold    leading-none">Pie Crust</div>
+                <div className="text-black text-opacity-50 text-xs font-normal   ">hello@piecrust.uk</div>
             </div>
         </div>
     );
@@ -107,7 +107,7 @@ function SideBarItem(props: SideBarItemProps){
         <a className={`${backgroundColor} w-full h-[40px] flex flex-row items-center rounded-[14px] px-[25px] py-[25px] gap-4`}
             href={itemhref}>
             {icon}
-            <div className="w-full h-fit flex items-center text-gray-800 pt-1.5 font-medium font-['Axiforma']">
+            <div className="w-full h-fit flex items-center text-gray-800 pt-1.5 font-medium  ">
                 {name}
             </div>
         </a>

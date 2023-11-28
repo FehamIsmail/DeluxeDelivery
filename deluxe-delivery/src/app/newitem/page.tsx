@@ -1,17 +1,11 @@
 import Header from "@/components/Header/Header";
-import {UserType} from "@/constants/types";
 
 export default function newItem() {
     return (
         <main className="bg-white min-h-screen items-center">
-            <Header type={UserType.CUSTOMER} />
-
-
-
+            <Header page={'MAIN_MENU'} />
                 <div className="w-[926px] h-[800px] bg-white rounded-[13px] shadow">
-
                     <form className="flex flex-col items-center"><label className="text-2xl font-bold">New Item</label>
-
                     <div className="w-[855px] h-[239px] bg-white rounded-[10px] border border-zinc-400" >
                         <input className="border-2 border-gray-400 rounded-lg w-1/2 p-2 m-2" type="text" placeholder="Item Name:" />
                         <input className="border-2 border-gray-400 rounded-lg w-1/2 p-2 m-2" type="text" placeholder="Item Description:" />
