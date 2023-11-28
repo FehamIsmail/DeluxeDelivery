@@ -7,7 +7,7 @@ function Header(props: HeaderProps) {
     // destructure props
     const {page} = props;
 
-    const heightClass = page === "OTHER" ? "lg:h-36 h-28 justify-center" : "h-[800px] justify-start";
+    const heightClass = page === "OTHER" ? "h-28 justify-center" : "h-[800px] justify-start";
 
     return (
         <>
