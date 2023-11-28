@@ -1,11 +1,10 @@
 import Header from "@/components/Header/Header";
-import Landing from "@/components/Landing/Landing";
+import {UserType} from "@/constants/types";
 
 export default function Home() {
   return (
     <main className="bg-white min-h-screen items-center">
-      <Header page={'MAIN_MENU'}/>
-      <Landing />
+      <Header type={UserType.CUSTOMER} />
     </main>
   )
 }
