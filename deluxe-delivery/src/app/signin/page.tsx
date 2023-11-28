@@ -1,3 +1,5 @@
+import Logo from "@/components/Logo/Logo";
+
 export default function signIn() {
     return (
         <main>
@@ -24,9 +26,7 @@ export default function signIn() {
                         <div className="flex-1  bg-white p-10 rounded-xl">
                             <div className="text-center">
                                 <div className="flex justify-center mx-auto">
-                                    <div className="w-[58px] h-[58px] bg-gradient-to-br from-fuchsia-500 to-indigo-500 rounded-full flex items-center justify-center pr-[3px]">
-                                        <img src="/logo_arrow.svg" alt="Deluxe Delivery Logo" className="" />
-                                    </div>
+                                    <Logo height={58} width={58} />
                                 </div>
 
                                 <p className="mt-3 text-gray-500">Sign in to access your account</p>
