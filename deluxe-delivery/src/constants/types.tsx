@@ -13,3 +13,16 @@ export enum UserType{
 }
 
 
+
+export interface Position {
+    x: number;
+    y: number;
+}
+
+export interface Item {
+    name: string;
+    description: string;
+    price: number;
+    quantity: number;
+}
+

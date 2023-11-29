@@ -56,8 +56,8 @@ function SideBar() {
 
 
     return (
-        <div className="flex flex-col h-[920px] w-[250px] bg-white rounded-[20px] border border-gray-100 shadow-xl mb-16">
-            <div className="w-full h-[68px] flex items-center  bg-primary-1 rounded-t-[20px]">
+        <div className="flex flex-col h-auto min-w-[250px] bg-white rounded-[20px] border border-gray-100 shadow-xl">
+            <div className="w-full h-[68px] flex items-center bg-primary-1 rounded-t-[20px]">
                 <div className="w-full h-full flex justify-center items-center text-white text-2xl font-medium  ">Orders</div>
             </div>
             <div className="flex flex-col gap-2 h-fit w-full mt-10 px-[24px]">
@@ -107,7 +107,7 @@ function SideBarItem(props: SideBarItemProps){
         <a className={`${backgroundColor} w-full h-[40px] flex flex-row items-center rounded-[14px] px-[25px] py-[25px] gap-4`}
             href={itemhref}>
             {icon}
-            <div className="w-full h-fit flex items-center text-gray-800 pt-1.5 font-medium  ">
+            <div className="w-full h-fit flex items-center text-gray-800 font-medium  ">
                 {name}
             </div>
         </a>
