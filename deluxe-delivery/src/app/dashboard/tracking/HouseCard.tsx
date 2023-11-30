@@ -12,7 +12,6 @@ interface HouseCardProps {
 }
 
 function HouseCard(props: HouseCardProps) {
-
     let itemObj = props.item;
     if(!itemObj) {
         itemObj =
@@ -52,7 +51,7 @@ function HouseCard(props: HouseCardProps) {
             }`}
             ref={divRef}
         >
-            <img className={"w-[100px] h-full object-fill rounded-lg"} src={"/house_sample.png"} alt={"house"}/>
+            <img className={"w-[100px] h-full object-fill rounded-lg"} src={props.houseImg} alt={"house"}/>
             <div className={"flex flex-col gap-1"}>
                 <span className={"text-sm font-semibold text-zinc-800"}>{itemObj.name} <span className={" font-normal"}>({itemObj.quantity})</span></span>
                 <span className={"text-white text-sm w-fit font-normal bg-[#49BEB7] px-2 rounded-md"}>Express Delivery</span>
