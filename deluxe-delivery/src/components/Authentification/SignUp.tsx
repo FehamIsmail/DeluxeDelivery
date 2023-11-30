@@ -7,6 +7,7 @@ const SignUp = () => {
 
     const supabase = connection
 
+    const [userType, setUserType] = useState('customer')
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [phone, setPhone] = useState('')
@@ -14,6 +15,10 @@ const SignUp = () => {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
 
+
+    const handleUserTypeChange = (event) => {
+        setUserType(event.target.value)
+    };
 
     const handleFirstNameChange = (event) => {
         setFirstName(event.target.value)
@@ -50,6 +55,7 @@ const SignUp = () => {
                     first_name: firstName,
                     last_name: lastName,
                     phone_number: phone,
+                    user_type: userType,
                 },
             },
         })
@@ -98,6 +104,9 @@ const SignUp = () => {
 
 
             <form className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2" onSubmit={handleSubmit}>
+
+
+
                 <div>
                     <label className="block mb-2 text-sm text-gray-600">First
                         Name</label>
@@ -115,7 +124,7 @@ const SignUp = () => {
                 <div>
                     <label className="block mb-2 text-sm text-gray-600">Phone
                         number</label>
-                    <input type="text" placeholder="XXX-XX-XXXX-XXX" value={phone} onChange={handlePhoneChange} required
+                    <input type="text" placeholder="XXX-XXX-XXXX" value={phone} onChange={handlePhoneChange} required
                            className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg focus:border-[#5752DA] focus:ring-[#5752DA] focus:outline-none focus:ring focus:ring-opacity-40"/>
                 </div>
 

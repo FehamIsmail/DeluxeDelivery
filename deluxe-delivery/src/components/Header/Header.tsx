@@ -38,7 +38,7 @@ function NavBar(props:{page: 'MAIN_MENU' | 'OTHER'}) {
             <div className="flex gap-4 flex-row items-center pt-1">
                 <div className="flex flex-row gap-14 text-white text-lg font-medium  mr-12">
                     <div>About</div>
-                    <div>Support</div>
+                    <div> <a href={'support'}>Support</a></div>
                 </div>
                 <>
                 <a href={'signin'} className="w-36 h-16 px-9 py-3.5 bg-white rounded-2xl justify-start items-center gap-2.5 inline-flex">

@@ -33,7 +33,6 @@ export default function newItem() {
                 </div>
 
 
-
         </main>
     )
 }
