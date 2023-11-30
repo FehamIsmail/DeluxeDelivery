@@ -1,51 +1,54 @@
 "use client";
 
-import React, {useState} from 'react';
-import connection from "../../supabase/supabase"
+
+import React, { useState } from 'react';
+import connection from '../../supabase/supabase';
 
 const SignUp = () => {
+    const supabase = connection;
 
-    const supabase = connection
+    const [userType, setUserType] = useState('customer');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [phone, setPhone] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [passwordMatchError, setPasswordMatchError] = useState(false);
 
-    const [userType, setUserType] = useState('customer')
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [phone, setPhone] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
-
-
-    const handleUserTypeChange = (event) => {
-        setUserType(event.target.value)
+    const handleUserTypeChange = (selectedType: string) => {
+        setUserType(selectedType);
     };
 
     const handleFirstNameChange = (event) => {
-        setFirstName(event.target.value)
+        setFirstName(event.target.value);
     };
 
     const handleLastNameChange = (event) => {
-        setLastName(event.target.value)
+        setLastName(event.target.value);
     };
 
     const handlePhoneChange = (event) => {
-        setPhone(event.target.value)
-    }
+        setPhone(event.target.value);
+    };
 
     const handleEmailChange = (event) => {
-        setEmail(event.target.value)
+        setEmail(event.target.value);
     };
 
     const handlePasswordChange = (event) => {
-        setPassword(event.target.value)
+        setPassword(event.target.value);
     };
-
-    const handleConfirmPasswordChange = (event) => {
-        setConfirmPassword(event.target.value)
-    }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        if (password !== confirmPassword) {
+            setPasswordMatchError(true);
+            return;
+        }
+
+        setPasswordMatchError(false);
 
         await supabase.auth.signUp({
             email,
@@ -58,55 +61,35 @@ const SignUp = () => {
                     user_type: userType,
                 },
             },
-        })
+        });
 
-        console.log('Submitted:', {firstName, lastName, phone, email, password, confirmPassword})
-
+        console.log('Submitted:', { firstName, lastName, phone, email, password, userType });
     };
-
 
     return (
         <div>
-
             <div className="mt-6">
                 <h1 className="text-gray-500">Select type of account</h1>
 
                 <div className="mt-3 md:flex md:items-center md:-mx-2">
-
                     <button
-                        className="flex justify-center w-full px-6 py-3 mt-4 text-[#5752DA] border border-[#5752DA] rounded-lg md:mt-0 md:w-auto md:mx-2 focus:outline-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none"
-                             viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                            <path strokeLinecap="round" strokeLinejoin="round"
-                                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                        </svg>
-
-                        <span className="mx-2">
-                                customer
-                            </span>
+                        className={`flex justify-center w-full px-6 py-3 mt-4 text-[#5752DA] border border-[#5752DA] rounded-lg md:mt-0 md:w-auto md:mx-2 focus:outline-none hover:bg-[#5752DA] hover:text-white focus:bg-[#5752DA] focus:text-white ${userType === 'customer' ? 'bg-[#5752DA] text-white' : ''}`}
+                        onClick={() => handleUserTypeChange('customer')}
+                    >
+                        Customer
                     </button>
 
                     <button
-                        className="flex justify-center w-full px-6 py-3 text-white bg-[#5752DA] rounded-lg md:w-auto md:mx-2 focus:outline-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none"
-                             viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                            <path strokeLinecap="round" strokeLinejoin="round"
-                                  d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                        </svg>
-
-                        <span className="mx-2">
-                                deliverer
-                            </span>
+                        className={`flex justify-center w-full px-6 py-3 mt-4 text-[#5752DA] border border-[#5752DA] rounded-lg md:mt-0 md:w-auto md:mx-2 focus:outline-none hover:bg-[#5752DA] hover:text-white focus:bg-[#5752DA] focus:text-white ${userType === 'deliverer' ? 'bg-[#5752DA] text-white' : ''}`}
+                        onClick={() => handleUserTypeChange('deliverer')}
+                    >
+                        Deliverer
                     </button>
-
                 </div>
             </div>
 
 
             <form className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2" onSubmit={handleSubmit}>
-
-
-
                 <div>
                     <label className="block mb-2 text-sm text-gray-600">First
                         Name</label>
@@ -143,14 +126,28 @@ const SignUp = () => {
                 </div>
 
                 <div>
-                    <label className="block mb-2 text-sm text-gray-600">Confirm
-                        password</label>
-                    <input type="password" placeholder="Enter your password" name={"confirmPassword"} onChange={handleConfirmPasswordChange} required
-                           className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg focus:border-[#5752DA]  focus:ring-[#5752DA] focus:outline-none focus:ring focus:ring-opacity-40"/>
+                    <label className="block mb-2 text-sm text-gray-600">Confirm password</label>
+                    <input
+                        type="password"
+                        placeholder="Enter your password"
+                        name="confirmPassword"
+                        onChange={(e) => {
+                            setConfirmPassword(e.target.value);
+                            setPasswordMatchError(false); // Reset error on input change
+                        }}
+                        required
+                        className={`block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg focus:border-[#5752DA] ${
+                            passwordMatchError ? 'border-red-500 focus:ring-red-500' : 'focus:ring-[#5752DA]'
+                        } focus:outline-none focus:ring focus:ring-opacity-40`}
+                    />
+                    {passwordMatchError && (
+                        <p className="text-red-500 text-xs mt-1">Passwords do not match. Please try again.</p>
+                    )}
                 </div>
 
+
                 <button type={"submit"}
-                    className="flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-[#5752DA] rounded-lg hover:bg-[#5752DA] focus:outline-none focus:ring focus:ring-[#5752DA] focus:ring-opacity-50">
+                        className="flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-[#5752DA] rounded-lg hover:bg-[#5752DA] focus:outline-none focus:ring focus:ring-[#5752DA] focus:ring-opacity-50">
                     <span>Sign Up </span>
 
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 rtl:-scale-x-100"
@@ -161,9 +158,8 @@ const SignUp = () => {
                     </svg>
                 </button>
             </form>
-
         </div>
-    )
-}
+    );
+};
 
-export default SignUp
+export default SignUp;
