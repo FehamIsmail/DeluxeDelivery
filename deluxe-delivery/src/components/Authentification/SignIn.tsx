@@ -22,16 +22,37 @@ const SignIn = () => {
     const handleSubmit =  async (event) => {
         event.preventDefault();
 
-        const {data, error} = await supabase.auth.signInWithPassword({
+        const {user, error} = await supabase.auth.signInWithPassword({
             email,
             password,
+
         })
 
-        console.log('Submitted:', {email, password})
+        if (error) {
+            console.error('Sign-in error:', error.message);
 
-    };
+
+        } else {
 
 
+            const { data, error: profileError } = await supabase
+                .from('profile')
+                .select('type')
+                .eq('email', email);
+            console.log(data)
+
+            if (profileError) {
+                console.error('Error fetching profile:', profileError.message);
+
+            } else if (data) {
+
+                console.log('Profile data:', data[0]);
+                localStorage.setItem('userType', data[0]);
+
+            }
+        }
+
+    }
 
     return (
 

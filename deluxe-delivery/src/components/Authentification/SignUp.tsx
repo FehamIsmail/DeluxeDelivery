@@ -1,9 +1,11 @@
 "use client";
 import React, { useState } from 'react';
 import connection from '../../supabase/supabase';
+import { useRouter } from 'next/router'
 
 const SignUp = () => {
     const supabase = connection;
+
 
     const [userType, setUserType] = useState('customer');
     const [firstName, setFirstName] = useState('');
@@ -48,7 +50,8 @@ const SignUp = () => {
 
         setPasswordMatchError(false);
 
-        await supabase.auth.signUp({
+
+        const { user, error} = await supabase.auth.signUp({
             email,
             password,
             options: {
@@ -60,6 +63,17 @@ const SignUp = () => {
                 },
             },
         });
+
+        if (error) {
+            console.error('Error signing up:', error.message);
+
+            return;
+        }
+
+        console.log('User signed up:', user);
+
+        window.location.href = '/signin';
+
 
         console.log('Submitted:', { firstName, lastName, phone, email, password, userType });
     };
