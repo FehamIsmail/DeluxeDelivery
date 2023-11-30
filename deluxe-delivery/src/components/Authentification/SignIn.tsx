@@ -25,9 +25,24 @@ const SignIn = () => {
         const {data, error} = await supabase.auth.signInWithPassword({
             email,
             password,
+
         })
 
-        console.log('Submitted:', {email, password})
+
+        if (error) {
+            console.error('Sign-in error:', error.message);
+            // Handle error states if needed
+        } else if (data) {
+            // Assuming you have userType in your data returned after sign-in
+            const userType = data.userType; // Replace with the correct property
+
+            // Store userType in local storage
+            localStorage.setItem('userType', userType);
+
+            console.log('Submitted:', { email, password});
+        }
+
+
 
     };
 
