@@ -1,6 +1,4 @@
 "use client";
-
-
 import React, { useState } from 'react';
 import connection from '../../supabase/supabase';
 
@@ -20,27 +18,27 @@ const SignUp = () => {
         setUserType(selectedType);
     };
 
-    const handleFirstNameChange = (event) => {
+    const handleFirstNameChange = (event: any) => {
         setFirstName(event.target.value);
     };
 
-    const handleLastNameChange = (event) => {
+    const handleLastNameChange = (event: any) => {
         setLastName(event.target.value);
     };
 
-    const handlePhoneChange = (event) => {
+    const handlePhoneChange = (event: any) => {
         setPhone(event.target.value);
     };
 
-    const handleEmailChange = (event) => {
+    const handleEmailChange = (event: any) => {
         setEmail(event.target.value);
     };
 
-    const handlePasswordChange = (event) => {
+    const handlePasswordChange = (event: any) => {
         setPassword(event.target.value);
     };
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (event: any) => {
         event.preventDefault();
 
         if (password !== confirmPassword) {

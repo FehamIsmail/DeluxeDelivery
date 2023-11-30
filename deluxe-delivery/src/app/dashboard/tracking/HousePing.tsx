@@ -4,6 +4,7 @@ import {Position} from "@/constants/types";
 
 interface HousePingProps {
     position: Position;
+    onClick: () => void;
 }
 function HousePing(props: HousePingProps) {
     const {position} = props;
@@ -21,8 +22,8 @@ function HousePing(props: HousePingProps) {
     },[divRef])
 
     return (
-        <div ref={divRef} style={{backgroundImage: "url('/house.png')", backgroundSize: "contain", backgroundRepeat: "no-repeat"}}
-             className={`h-[48px] w-[48px] relative`}
+        <div onClick={props.onClick} ref={divRef} style={{backgroundImage: "url('/house.png')", backgroundSize: "contain", backgroundRepeat: "no-repeat"}}
+             className={`h-[48px] w-[48px] relative cursor-pointer`}
         ></div>
     );
 }

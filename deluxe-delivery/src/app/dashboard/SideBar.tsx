@@ -104,7 +104,7 @@ function SideBarItem(props: SideBarItemProps){
 
 
     return (
-        <a className={`${backgroundColor} w-full h-[40px] flex flex-row items-center rounded-[14px] px-[25px] py-[25px] gap-4`}
+        <a className={`${backgroundColor} w-full h-[40px] flex flex-row items-center rounded-[14px] px-[25px] py-[25px] gap-4 hover:bg-gray-100`}
             href={itemhref}>
             {icon}
             <div className="w-full h-fit flex items-center text-gray-800 font-medium  ">

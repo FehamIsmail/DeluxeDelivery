@@ -22,8 +22,8 @@ const config: Config = {
       },
       keyframes: {
         pulseOpacity: {
-          '0%, 100%': { opacity: 1 },
-          '50%': { opacity: 0.6 },
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.6' },
         },
       },
     },

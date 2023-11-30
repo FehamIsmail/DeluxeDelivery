@@ -17,3 +17,41 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.arrow-container {
+    position: relative;
+}
+
+.arrow {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 15px solid #ffffff; /* You can change the color */
+}
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fade-in-up 0.4s ease-out;
+}
+
+.hidden {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: visibility 0s linear 0.5s, opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
