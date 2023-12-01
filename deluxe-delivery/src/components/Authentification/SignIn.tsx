@@ -2,10 +2,12 @@
 
 import {useState} from "react";
 import connection from "../../supabase/supabase"
+import {useRouter} from "next/navigation";
 
 const SignIn = () => {
 
     const supabase = connection
+    const router = useRouter()
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -22,7 +24,7 @@ const SignIn = () => {
     const handleSubmit =  async (event) => {
         event.preventDefault();
 
-        const {user, error} = await supabase.auth.signInWithPassword({
+        const {error} = await supabase.auth.signInWithPassword({
             email,
             password,
 
@@ -48,6 +50,7 @@ const SignIn = () => {
 
                 console.log('Profile data:', data[0]);
                 localStorage.setItem('userType', data[0]);
+                router.push('/');
 
             }
         }

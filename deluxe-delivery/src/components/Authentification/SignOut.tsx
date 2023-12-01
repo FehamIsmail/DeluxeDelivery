@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect } from 'react';
-import { supabase } from '../../supabase';
 import connection from "@/supabase/supabase";
+import { useRouter } from 'next/navigation';
 
 const SignOut = () => {
+
+    const router = useRouter();
 
     const supabase = connection
 
@@ -13,13 +15,14 @@ const SignOut = () => {
             try {
                 await supabase.auth.signOut();
                 localStorage.removeItem('profileData');
+                router.push('/');
             } catch (error) {
                 console.error('Error signing out:', error.message);
             }
         };
 
         signOut();
-    }, []);
+    },[router] );
 
     return (
         <div>

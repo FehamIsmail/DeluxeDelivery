@@ -23,8 +23,6 @@ function Header(props: HeaderProps) {
 }
 
 
-
-
 function NavBar(props:{page: 'MAIN_MENU' | 'OTHER'}) {
     const {page} = props;
     const paddingTop  = page === "OTHER" ? "" : "pt-4";
