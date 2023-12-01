@@ -15,11 +15,6 @@ export default function Support() {
         setSubmitted(true);
     };
 
-    const resetForm = () => {
-        // Reset the form or perform any necessary cleanup
-        setSubmitted(false);
-    };
-
     return (
         <main className="bg-white min-h-screen items-center">
             <Header page={'OTHER'} />
@@ -78,7 +73,7 @@ export default function Support() {
                             <label className="block mt-5 mb-2 text-sm text-gray-600">Upload file (Optional)</label>
                             <input
                                 className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
-                                aria-describedby="file_input_help" id="file_input" type="file"></input>
+                                aria-describedby="file_input_help" id="file_input" type="file"/>
 
                             <p className="mt-1 text-sm text-gray-500"
                                id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>
@@ -96,7 +91,9 @@ export default function Support() {
                     <div className="flex-auto max-w-md h-100 m-auto mt-10 text-center">
                         <h2>Thank you for your comments!</h2>
                         <p>We will get back to you shortly.</p>
-                        <button onClick={resetForm} className="mt-4 px-4 py-2 bg-gray-300 rounded-lg">Close</button>
+                        <a href={'/'}>
+                        <button className="mt-4 px-4 py-2 bg-gray-300 rounded-lg">Take me back!</button>
+                        </a>
                     </div>
                 )}
             </div>
