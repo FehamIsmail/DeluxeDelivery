@@ -26,3 +26,9 @@ export interface Item {
     quantity: number;
 }
 
+export enum status {
+    "NEW",
+    "ONGOING",
+    "DELIVERED"
+}
+

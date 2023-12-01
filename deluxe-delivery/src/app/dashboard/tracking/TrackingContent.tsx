@@ -94,10 +94,10 @@ function TrackingContent() {
                 <HousePing onClick={toggleVisible(1)} position={{x: 400, y: 32}}/>
                 <HousePing onClick={toggleVisible(2)} position={{x: 500, y: 260}}/>
                 <HousePing onClick={toggleVisible(3)} position={{x: 700, y: -90}}/>
-                <HouseCard pinged={false} houseImg={"/house_sample_0.png"} position={{x: -66, y: -350}} item={takenItems[0] || null} isVisible={isCardVisible[0]} openChatBox={openChatBox}/>
-                <HouseCard pinged={true} houseImg={"/house_sample_1.png"} position={{x: 273, y: -302}} item={takenItems[1] || null} isVisible={isCardVisible[1]} openChatBox={openChatBox}/>
-                <HouseCard pinged={false} houseImg={"/house_sample_2.png"} position={{x: 373, y: -22}}  item={takenItems[2] || null} isVisible={isCardVisible[2]} openChatBox={openChatBox}/>
-                <HouseCard pinged={false} houseImg={"/house_sample_3.png"} position={{x: 573, y: -323}} item={takenItems[3] || null} isVisible={isCardVisible[3]} openChatBox={openChatBox}/>
+                {<HouseCard pinged={false} houseImg={"/house_sample_0.png"} position={{x: -66, y: -350}} item={takenItems[0] || null} isVisible={isCardVisible[0]} openChatBox={openChatBox}/>}
+                {<HouseCard pinged={true}  houseImg={"/house_sample_1.png"} position={{x: 273, y: -302}} item={takenItems[1] || null} isVisible={isCardVisible[1]} openChatBox={openChatBox}/>}
+                {<HouseCard pinged={false} houseImg={"/house_sample_2.png"} position={{x: 373, y: -22}}  item={takenItems[2] || null} isVisible={isCardVisible[2]} openChatBox={openChatBox}/>}
+                {<HouseCard pinged={false} houseImg={"/house_sample_3.png"} position={{x: 573, y: -323}} item={takenItems[3] || null} isVisible={isCardVisible[3]} openChatBox={openChatBox}/>}
                 <div className={"text-xs font-normal absolute top-[568px] left-[840px] chat p-[1px] rounded-full w-6 h-6 flex items-center justify-center " +
                     "bg-red-500 text-white border-[2px] border-red-100"}>
                     2
