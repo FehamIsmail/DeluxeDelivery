@@ -1,5 +1,5 @@
 "use client"
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 function NewTable() {
     interface item{
@@ -12,6 +12,8 @@ function NewTable() {
         isChecked: boolean,
         isExpressDelivery: boolean;
     }
+
+    const [showConfirmation, setShowConfirmation] = useState<boolean>(false);
 
     const [newItems , setNewItems] = useState<item[]>([
         {
@@ -59,10 +61,15 @@ function NewTable() {
     const takeOrder = () => {
         // Get all checked items and put in localStorage
         let checkedItems = newItems.filter((item) => item.isChecked);
+        // Make all items unchecked before putting in localStorage
+        checkedItems = checkedItems.map((item) => {
+            item.isChecked = false;
+            return item;
+        })
         localStorage.setItem('newItems', JSON.stringify(checkedItems));
-        console.log(localStorage.getItem('newItems'));
-        // filter out checked items
-        setNewItems(newItems.filter((item) => !item.isChecked));
+        // filter out checked items from newItems using checkedItems
+        setNewItems(newItems.filter((item) => item == null || !checkedItems.includes(item)));
+        setShowConfirmation(true)
     }
 
     const handleCheckboxChange = (index: number) => {
@@ -74,10 +81,22 @@ function NewTable() {
         }))
     };
 
+    useEffect(() => {
+      // filter newitems with new items already present in the localStorage
+        let newItemsLocal = localStorage.getItem('newItems');
+        if (newItemsLocal) {
+            let parsedNewItems = JSON.parse(newItemsLocal);
+            console.log(parsedNewItems)
+            // filter out items present in parsedNewItems from newItems using id
+            setNewItems(newItems.filter((item) => item == null || !parsedNewItems.includes(item)));
+
+        }
+
+    }, [setNewItems])
+
 
     return (
         <>
-            <div className="text-3xl text-red-800">NEW</div>
             <div className="flex flex-col p-[30px] w-full h-full shadow-md border-[1px] rounded-xl">
                 <div className="w-full h-5 text-zinc-800 text-base font-semibold pb-[30px] border-b-[1px] ">New Items</div>
                 <table className="mt-2 h-[540px]">
@@ -112,9 +131,10 @@ function NewTable() {
                     </tbody>
                 </table>
             </div>
-            <button onClick={takeOrder} className="ml-[1258px] mt-6 w-32 h-14 bg-amber-500 rounded-2xl hover:bg-amber-600 justify-center items-center gap-2.5 inline-flex">
+            <button onClick={takeOrder} className="ml-[1258px] mt-16 w-32 h-14 bg-amber-500 rounded-2xl hover:bg-amber-600 justify-center items-center gap-2.5 inline-flex">
                 <div className="text-center text-white text-base font-semibold font-['Axiforma']">Take Order</div>
             </button>
+            {showConfirmation && <img onClick={() => {setShowConfirmation(false)}} className="absolute cursor-pointer top-[910px] left-[410px] object-cover h-auto w-[400px]" src="/order_picked.PNG" alt="map"/>}
         </>
     );
 }

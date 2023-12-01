@@ -10,6 +10,7 @@
     "css": "tailwindcss build -i globals.css -o globals.css"
   },
   "dependencies": {
+    "@emailjs/browser": "^3.11.0",
     "@heroicons/react": "^2.0.18",
     "@supabase/auth-helpers-nextjs": "^0.8.7",
     "@supabase/auth-ui-react": "^0.4.6",
