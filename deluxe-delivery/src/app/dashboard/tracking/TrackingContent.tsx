@@ -1,11 +1,12 @@
 "use client"
-import React from 'react';
+import React, {useEffect} from 'react';
 import CarPing from "@/app/dashboard/tracking/CarPing";
 import HousePing from "@/app/dashboard/tracking/HousePing";
 import HouseCard from "@/app/dashboard/tracking/HouseCard";
 import DelivererCard from "@/app/dashboard/tracking/DelivererCard";
-import ChatBox from "@/components/Chat/ChatBox";
+import ChatBox, {ChatBoxProps} from "@/components/Chat/ChatBox";
 import {XMarkIcon} from "@heroicons/react/24/outline";
+import {CHATBOX_ITEMS} from "@/constants/constants";
 
 function TrackingContent() {
 
@@ -13,11 +14,26 @@ function TrackingContent() {
     const [isChecked, setChecked] = React.useState(false);
     const [mapImg, setMapImg] = React.useState("/map.png");
     const [isChatVisible, setIsChatVisible] = React.useState(false);
-    const [isChatBoxOpen, setIsChatBoxOpen] = React.useState(false);
+    const [isChatBoxOpen, setIsChatBoxOpen] = React.useState(true);
+    const [chatBoxIndex, setChatBoxIndex] = React.useState(0);
+    const [takenItems, setTakenItems] = React.useState<any[]>([])
+
 
     const handleChatboxToggle = () => {
         setIsChatBoxOpen(!isChatBoxOpen);
     }
+
+    const getOpenedHouseCard = () => {
+        for (let i = 0; i < isCardVisible.length; i++) {
+            if (isCardVisible[i]) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    const [chatBox, setChatBox] = React.useState<ChatBoxProps[]>(CHATBOX_ITEMS(handleChatboxToggle));
+
 
     const toggleVisible = (index: number) => {
         // allows 1 house card to be visible at a time
@@ -31,10 +47,12 @@ function TrackingContent() {
 
     const closeChatBox = () => {
         setIsChatVisible(false);
+        setIsChatBoxOpen(true)
     }
 
     const openChatBox = () => {
         setIsChatVisible(true);
+        setChatBoxIndex(getOpenedHouseCard())
     }
 
     const handleCheckboxChange = () => {
@@ -46,6 +64,19 @@ function TrackingContent() {
         }
     };
 
+
+
+    useEffect(() => {
+        let newItemsLocal = localStorage.getItem('newItems');
+        if (newItemsLocal) {
+            setTakenItems(JSON.parse(newItemsLocal));
+        }
+
+    },[isCardVisible, setTakenItems])
+
+    useEffect(() => {
+        console.log(takenItems);
+    },[takenItems])
     return (
         <div className="flex flex-col gap-4">
             <div className="w-80 h-5">
@@ -63,10 +94,10 @@ function TrackingContent() {
                 <HousePing onClick={toggleVisible(1)} position={{x: 400, y: 32}}/>
                 <HousePing onClick={toggleVisible(2)} position={{x: 500, y: 260}}/>
                 <HousePing onClick={toggleVisible(3)} position={{x: 700, y: -90}}/>
-                <HouseCard houseImg={""} position={{x: -66, y: -350}} item={null} isVisible={isCardVisible[0]} openChatBox={openChatBox}/>
-                <HouseCard houseImg={""} position={{x: 273, y: -302}} item={null} isVisible={isCardVisible[1]} openChatBox={openChatBox}/>
-                <HouseCard houseImg={""} position={{x: 373, y: -22}}  item={null} isVisible={isCardVisible[2]} openChatBox={openChatBox}/>
-                <HouseCard houseImg={""} position={{x: 573, y: -323}} item={null} isVisible={isCardVisible[3]} openChatBox={openChatBox}/>
+                <HouseCard pinged={false} houseImg={"/house_sample_0.png"} position={{x: -66, y: -350}} item={takenItems[0] || null} isVisible={isCardVisible[0]} openChatBox={openChatBox}/>
+                <HouseCard pinged={true} houseImg={"/house_sample_1.png"} position={{x: 273, y: -302}} item={takenItems[1] || null} isVisible={isCardVisible[1]} openChatBox={openChatBox}/>
+                <HouseCard pinged={false} houseImg={"/house_sample_2.png"} position={{x: 373, y: -22}}  item={takenItems[2] || null} isVisible={isCardVisible[2]} openChatBox={openChatBox}/>
+                <HouseCard pinged={false} houseImg={"/house_sample_3.png"} position={{x: 573, y: -323}} item={takenItems[3] || null} isVisible={isCardVisible[3]} openChatBox={openChatBox}/>
                 <div className={"text-xs font-normal absolute top-[568px] left-[840px] chat p-[1px] rounded-full w-6 h-6 flex items-center justify-center " +
                     "bg-red-500 text-white border-[2px] border-red-100"}>
                     2
@@ -83,7 +114,11 @@ function TrackingContent() {
                 <span className="flex flex-row items-center gap-2 w-full ml-2 text-md font-medium">Show optimized path <div className={"text-red-500 mb-[9px]"}>▃ ▃ ▃</div></span>
             </label>
             <div className="absolute top-[681px] left-[1420px]">
-                {isChatVisible && <ChatBox handleChatboxToggle={handleChatboxToggle} isChatboxOpen={isChatBoxOpen} />}
+                {isChatVisible && <ChatBox messages={chatBox[chatBoxIndex].messages}
+                                           sender={chatBox[chatBoxIndex].sender}
+                                           handleChatboxToggle={handleChatboxToggle}
+                                           isChatboxOpen={isChatBoxOpen}/>
+                }
             </div>
             {(isChatVisible && !isChatBoxOpen) && <button
                 onClick={closeChatBox}
