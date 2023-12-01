@@ -1,5 +1,5 @@
 "use client"
-import React from 'react';
+import React, {useEffect} from 'react';
 import Logo from "@/components/Logo/Logo";
 import ProfilePicture from "@/components/ProfilePicture/ProfilePicture";
 import {signOut} from "@/components/Authentification/SignOut";
@@ -29,8 +29,11 @@ function Header(props: HeaderProps) {
 function NavBar(props:{page: 'MAIN_MENU' | 'OTHER'}) {
     const {page} = props;
     const paddingTop  = page === "OTHER" ? "" : "pt-4";
-    const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
-    const userType = localStorage.getItem('userType');
+    const [isAuthenticated, setIsAuthenticated] = React.useState<boolean>(false);
+    const [userType, setUserType] = React.useState<'customer'|'deliverer'>("customer");
+
+
+
     const [isSignoutOpen, setIsSignoutOpen] = React.useState(false);
     const [isSignoutHovered, setIsSignoutHovered] = React.useState(false);
     const signoutClass = isSignoutOpen ? "block" : "hidden";
@@ -50,6 +53,11 @@ function NavBar(props:{page: 'MAIN_MENU' | 'OTHER'}) {
     const handleSignOut = () => {
         signOut();
     }
+
+    useEffect(() => {
+        setIsAuthenticated(localStorage.getItem('isAuthenticated') === 'true');
+        setUserType(localStorage.getItem('userType') as 'customer'|'deliverer');
+    })
 
     return(
         <div className={`flex flex-row justify-between ${paddingTop}`}>
@@ -90,19 +98,13 @@ function NavBar(props:{page: 'MAIN_MENU' | 'OTHER'}) {
                     <div onClick={handleClickProfilePicture} className={"cursor-pointer"}><ProfilePicture url={'/deliverer.png'} size={67} /></div>
                 }
                 </>
-                <div className={`absolute top-[108px] left-[1662px] bg-white rounded-xl ${signoutClass} ${isSignoutOpen ? 'fade-in-down' : 'hidden'}`}
-                     onMouseEnter={handleMouseEnter}
-                     onMouseLeave={handleMouseLeave}>
+                <div className={`absolute top-[108px] left-[1662px] bg-white rounded-xl shadow-xl ${signoutClass} ${isSignoutOpen ? 'fade-in-down' : 'hidden'}`}>
                     <div
                         className={`cursor-pointer px-3 py-1.5 hover:bg-red-500 rounded-lg transition-all duration-300 hover:text-white`}
                         onClick={handleSignOut}
                     >
                         Sign out
                     </div>
-                    {/*<div*/}
-                    {/*    className={`arrow-up transition-all duration-300 hover:border-t-white`}*/}
-                    {/*    style={{borderTopColor: isSignoutHovered ? '#ef4444' : 'white'}}*/}
-                    {/*></div>*/}
                 </div>
             </div>
         </div>
