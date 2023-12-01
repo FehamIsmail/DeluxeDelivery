@@ -8,7 +8,7 @@ function Logo(props: {height: number, width: number}) {
     return (
         <div className=
                  {`${dimensions} bg-gradient-to-br from-fuchsia-500 to-indigo-500 rounded-full flex items-center justify-center pr-[3px]`}>
-            <img src="/logo_arrow.svg" alt="Deluxe Delivery Logo" className="" />
+            <a href="/"> <img src="/logo_arrow.svg"  alt="Deluxe Delivery Logo" className="" /> </a>
         </div>
     );
 }

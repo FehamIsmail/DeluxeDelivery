@@ -107,7 +107,7 @@ const NewItem = () => {
                                             <label htmlFor="itemName" className="block text-sm font-semibold mb-1">Item
                                                 Name</label>
                                             <input type="text" required
-                                                   className="border border-gray-300 rounded-md p-2 w-full"></input>
+                                                   className="border border-gray-300 rounded-md p-2 w-full"/>
                                         </div>
 
                                         <div className="mb-4">
@@ -115,14 +115,14 @@ const NewItem = () => {
                                                    className="block text-sm font-semibold mb-1">Item
                                                 Description</label>
                                             <input type="text" required
-                                                   className="border border-gray-300 rounded-md p-2 w-full"></input>
+                                                   className="border border-gray-300 rounded-md p-2 w-full"/>
                                         </div>
 
                                         <div className="mb-4">
                                             <label htmlFor="itemQuantity" className="block text-sm font-semibold mb-1">Item
                                                 Quantity</label>
                                             <input type="number" value={quantity} onChange={handleQuantityChange} required
-                                                   className="border border-gray-300 rounded-md p-2 w-full"></input>
+                                                   className="border border-gray-300 rounded-md p-2 w-full"/>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -138,7 +138,7 @@ const NewItem = () => {
                                                    className="block text-sm font-semibold mb-1">Name</label>
                                             <input type="text" value={recipientName}
                                                    onChange={handleRecipientNameChange} required
-                                                   className="border border-gray-300 rounded-md p-2 w-full"></input>
+                                                   className="border border-gray-300 rounded-md p-2 w-full"/>
                                         </div>
 
                                         <div className="mb-4">
@@ -146,7 +146,7 @@ const NewItem = () => {
                                                    className="block text-sm font-semibold mb-1">Email
                                                 Address</label>
                                             <input type="email" required
-                                                   className="border border-gray-300 rounded-md p-2 w-full"></input>
+                                                   className="border border-gray-300 rounded-md p-2 w-full"/>
                                         </div>
 
                                         <div className="mb-4">
@@ -154,7 +154,7 @@ const NewItem = () => {
                                                    className="block text-sm font-semibold mb-1">Address
                                                 and Phone</label>
                                             <input type="text" required
-                                                   className="border border-gray-300 rounded-md p-2 w-full"></input>
+                                                   className="border border-gray-300 rounded-md p-2 w-full"/>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -169,7 +169,7 @@ const NewItem = () => {
                                                    className="block text-sm font-semibold mb-1">Length (m)</label>
                                             <input type="number" value={packageLength}
                                                    onChange={handlePackageLengthChange} required
-                                                   className="border border-gray-300 rounded-md p-2 w-full"></input>
+                                                   className="border border-gray-300 rounded-md p-2 w-full"/>
                                         </div>
 
                                         <div className="mb-4">
@@ -177,7 +177,7 @@ const NewItem = () => {
                                                    className="block text-sm font-semibold mb-1">Width (m)</label>
                                             <input type="number" value={packageWidth}
                                                    onChange={handlePackageWidthChange} required
-                                                   className="border border-gray-300 rounded-md p-2 w-full"></input>
+                                                   className="border border-gray-300 rounded-md p-2 w-full"/>
                                         </div>
 
                                         <div className="mb-4">
@@ -185,7 +185,7 @@ const NewItem = () => {
                                                    className="block text-sm font-semibold mb-1">Height (m)</label>
                                             <input type="number" value={packageHeight}
                                                    onChange={handlePackageHeightChange} required
-                                                   className="border border-gray-300 rounded-md p-2 w-full"></input>
+                                                   className="border border-gray-300 rounded-md p-2 w-full"/>
                                         </div>
 
                                         <div className="mb-4">
@@ -193,7 +193,7 @@ const NewItem = () => {
                                                    className="block text-sm font-semibold mb-1">Weight (kg)</label>
                                             <input type="number" value={packageWeight}
                                                    onChange={handlePackageWeightChange} required
-                                                   className="border border-gray-300 rounded-md p-2 w-full"></input>
+                                                   className="border border-gray-300 rounded-md p-2 w-full"/>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -272,7 +272,6 @@ const NewItem = () => {
                                 </div>
 
                                 <div className="flex flex-col items-end text-zinc-700 text-xl font-normal leading-tight">
-                                    <p></p>
                                     <p className="mx-2 mb-6 mt-6">{Math.round(quotationDetails.packagingFee * 100) / 100} $</p>
                                     <p className="mx-2 mb-6">{Math.round(quotationDetails.baseDeliveryFee * 100) / 100} $</p>
                                     <p className="mx-2 mb-6">{Math.round(quotationDetails.serviceFee * 100) / 100} $</p>
@@ -297,13 +296,10 @@ const NewItem = () => {
                             <div className="flex flex-row justify-between">
                                 <div className="flex flex-col items-start text-zinc-700 text-xl font-normal leading-tight">
                                     <p className="mx-2 mt-6">Delivery Date:</p>
-
                                 </div>
 
                                 <div className="flex flex-col items-end text-zinc-700 text-xl font-normal leading-tight">
-                                    <p></p>
                                     <p className="mx-2 mt-6">23/02/2023</p>
-
                                 </div>
                             </div>
 
@@ -329,7 +325,7 @@ const NewItem = () => {
                             </p>
                             <div className="flex justify-end mt-6">
                                 <a href="/">
-                                <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">
+                                <button className="bg-indigo-600 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">
                                     Back to Home
                                 </button>
                                 </a>
