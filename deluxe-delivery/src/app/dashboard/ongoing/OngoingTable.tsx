@@ -11,6 +11,7 @@ function OngoingTable() {
     const [ongoingItems , setOngoingItems] = React.useState<any[]>([])
 
     const handleActionButton = (idx: number) => {
+        console.log(ongoingItems)
         // Set the item's checked to be true
         const newItems = [...ongoingItems];
         // search for the item with the id
@@ -32,7 +33,6 @@ function OngoingTable() {
                 sendEmailAfterDelivery(item.id);
             }
 
-            item.isChecked = false;
             item.isChecked = false;
         })
         // update the ongoing items list with modified items
@@ -95,7 +95,7 @@ function OngoingTable() {
                         <td className={""}>{item.orderDate.slice(0,10)}</td>
                         <td className={"p-0 flex justify-center"}>
                             <button onClick={() => handleActionButton(item.id)}
-                                    className={`w-32 h-5 bg-blue-600 ${item.isChecked ? 'bg-blue-400' : 'bg-blue-600'} rounded-xl`}>
+                                    className={`w-32 h-5 bg-blue-600 ${item.isChecked ? 'bg-blue-300' : 'bg-blue-600'} rounded-xl`}>
                                 <div className="text-white text-xs font-medium">{
                                     item.status === status.NEW ? 'Pick up' : 'Mark as Delivered'
                                 }</div>

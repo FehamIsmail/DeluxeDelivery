@@ -12,49 +12,40 @@ const SignIn = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const handleEmailChange = (event) => {
+    const handleEmailChange = (event:any) => {
         setEmail(event.target.value)
     };
 
-    const handlePasswordChange = (event) => {
+    const handlePasswordChange = (event: any) => {
         setPassword(event.target.value)
     };
 
 
-    const handleSubmit =  async (event) => {
+    const handleSubmit =  async (event:any) => {
         event.preventDefault();
 
         const {error} = await supabase.auth.signInWithPassword({
             email,
             password,
-
         })
 
         if (error) {
             console.error('Sign-in error:', error.message);
-
-
         } else {
-
-
             const { data, error: profileError } = await supabase
                 .from('profile')
                 .select('type')
                 .eq('email', email);
             console.log(data)
-
             if (profileError) {
                 console.error('Error fetching profile:', profileError.message);
-
             } else if (data) {
-
                 console.log('Profile data:', data[0]);
-                localStorage.setItem('userType', data[0]);
+                localStorage.setItem('userType', data[0].type);
+                localStorage.setItem('isAuthenticated', 'true');
                 router.push('/');
-
             }
         }
-
     }
 
     return (

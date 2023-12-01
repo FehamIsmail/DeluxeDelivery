@@ -34,6 +34,18 @@ body {
     border-top: 15px solid #ffffff; /* You can change the color */
 }
 
+.arrow-up {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) rotate(180deg);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 12px solid #ffffff; /* You can change the color */
+}
+
 @keyframes fade-in-up {
     from {
         opacity: 0;
@@ -45,8 +57,23 @@ body {
     }
 }
 
+@keyframes fade-in-down {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .fade-in-up {
     animation: fade-in-up 0.4s ease-out;
+}
+
+.fade-in-down {
+    animation: fade-in-down 0.4s ease-out;
 }
 
 .hidden {

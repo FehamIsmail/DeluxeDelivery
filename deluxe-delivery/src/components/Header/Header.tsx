@@ -1,5 +1,8 @@
+"use client"
 import React from 'react';
 import Logo from "@/components/Logo/Logo";
+import ProfilePicture from "@/components/ProfilePicture/ProfilePicture";
+import {signOut} from "@/components/Authentification/SignOut";
 
 export interface HeaderProps {
     page: 'MAIN_MENU' | 'OTHER';
@@ -26,11 +29,32 @@ function Header(props: HeaderProps) {
 function NavBar(props:{page: 'MAIN_MENU' | 'OTHER'}) {
     const {page} = props;
     const paddingTop  = page === "OTHER" ? "" : "pt-4";
+    const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+    const userType = localStorage.getItem('userType');
+    const [isSignoutOpen, setIsSignoutOpen] = React.useState(false);
+    const [isSignoutHovered, setIsSignoutHovered] = React.useState(false);
+    const signoutClass = isSignoutOpen ? "block" : "hidden";
+
+    const handleMouseEnter = () => {
+        setIsSignoutHovered(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsSignoutHovered(false);
+    };
+
+    const handleClickProfilePicture = () => {
+        setIsSignoutOpen(!isSignoutOpen)
+    }
+
+    const handleSignOut = () => {
+        signOut();
+    }
 
     return(
         <div className={`flex flex-row justify-between ${paddingTop}`}>
             <div className="flex gap-4 flex-row content-center items-center">
-                <Logo height={58} width={58} />
+                <a href="/"><Logo height={58} width={58} /></a>
                 <div className="text-white text-xl font-extrabold ">Deluxe Delivery</div>
             </div>
             <div className="flex gap-4 flex-row items-center">
@@ -39,13 +63,47 @@ function NavBar(props:{page: 'MAIN_MENU' | 'OTHER'}) {
                     <div> <a href={'support'}>Support</a></div>
                 </div>
                 <>
-                <a href={'signin'} className="w-36 h-16 px-9 py-3.5 bg-white rounded-2xl justify-start items-center gap-2.5 inline-flex">
-                    <div className="text-primary-1 text-lg font-semibold mx-auto">Login</div>
-                </a>
-                <a href={'signup'} className="w-36 h-16 px-9 py-3.5 bg-amber-500 rounded-2xl justify-start items-center gap-2.5 inline-flex">
-                    <div className="text-white text-lg font-semibold">Sign up</div>
-                </a>
+                {!isAuthenticated &&
+                    <a href={'signin'} className="w-36 h-16 px-9 py-3.5 bg-white rounded-2xl justify-start items-center gap-2.5 inline-flex">
+                        <div className="text-primary-1 text-lg font-semibold mx-auto">Login</div>
+                    </a>
+                }
+                {!isAuthenticated &&
+                    <a href={'signup'} className="w-36 h-16 px-9 py-3.5 bg-amber-500 rounded-2xl justify-start items-center gap-2.5 inline-flex">
+                        <div className="text-white text-lg font-semibold">Sign up</div>
+                    </a>
+                }
+                {isAuthenticated && userType === 'customer' && userType &&
+                    <a href={'newitem'} className="mr-4 w-[190px] h-16 px-9 py-3.5 bg-amber-500 rounded-2xl justify-start items-center gap-2.5 inline-flex">
+                        <div className="text-white text-lg font-semibold">New Delivery</div>
+                    </a>
+                }
+                {isAuthenticated && userType === 'deliverer' && userType &&
+                    <a href={'dashboard/new'} className="mr-4 w-fit h-16 px-9 py-3.5 bg-amber-500 rounded-2xl justify-start items-center gap-2.5 inline-flex">
+                        <div className="text-white text-lg font-semibold">Dashboard</div>
+                    </a>
+                }
+                {isAuthenticated && userType === 'customer' && userType &&
+                    <div onClick={handleClickProfilePicture} className={"cursor-pointer"}><ProfilePicture url={'/client.png'} size={67} /></div>
+                }
+                {isAuthenticated && userType === 'deliverer' && userType &&
+                    <div onClick={handleClickProfilePicture} className={"cursor-pointer"}><ProfilePicture url={'/deliverer.png'} size={67} /></div>
+                }
                 </>
+                <div className={`absolute top-[108px] left-[1662px] bg-white rounded-xl ${signoutClass} ${isSignoutOpen ? 'fade-in-down' : 'hidden'}`}
+                     onMouseEnter={handleMouseEnter}
+                     onMouseLeave={handleMouseLeave}>
+                    <div
+                        className={`cursor-pointer px-3 py-1.5 hover:bg-red-500 rounded-lg transition-all duration-300 hover:text-white`}
+                        onClick={handleSignOut}
+                    >
+                        Sign out
+                    </div>
+                    {/*<div*/}
+                    {/*    className={`arrow-up transition-all duration-300 hover:border-t-white`}*/}
+                    {/*    style={{borderTopColor: isSignoutHovered ? '#ef4444' : 'white'}}*/}
+                    {/*></div>*/}
+                </div>
             </div>
         </div>
     )
